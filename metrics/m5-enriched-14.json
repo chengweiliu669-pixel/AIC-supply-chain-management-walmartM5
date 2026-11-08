@@ -1,0 +1,84 @@
+{
+  "horizon": 14,
+  "store": null,
+  "series_count": 30490,
+  "sales_file": "sales_train_evaluation.csv",
+  "calendar_file": "calendar.csv",
+  "prices_file": "sell_prices.csv",
+  "price_mode": "planned_price_known",
+  "enriched_features": true,
+  "feature_count": 62,
+  "training_weeks": 26,
+  "lightgbm_version": "4.6.0",
+  "folds": [
+    {
+      "origin": "d_1857",
+      "common_14d": {
+        "mae": 1.0317058367467062,
+        "wape": 0.732544368236179,
+        "cumulative_mae_per_series": 6.051300178817801
+      },
+      "common_14d_seasonal": {
+        "mae": 1.201920986175537,
+        "wape": 0.8534026188321712,
+        "cumulative_mae_per_series": 7.255887031555176
+      },
+      "full_horizon": {
+        "mae": 1.0317058367467062,
+        "wape": 0.732544368236179,
+        "cumulative_mae_per_series": 6.051300178817801
+      },
+      "full_horizon_seasonal": {
+        "mae": 1.201920986175537,
+        "wape": 0.8534026188321712,
+        "cumulative_mae_per_series": 7.255887031555176
+      }
+    },
+    {
+      "origin": "d_1885",
+      "common_14d": {
+        "mae": 1.030532352713669,
+        "wape": 0.7303092949130833,
+        "cumulative_mae_per_series": 5.968705294628825
+      },
+      "common_14d_seasonal": {
+        "mae": 1.230019211769104,
+        "wape": 0.8716800201880007,
+        "cumulative_mae_per_series": 7.526992321014404
+      },
+      "full_horizon": {
+        "mae": 1.030532352713669,
+        "wape": 0.7303092949130833,
+        "cumulative_mae_per_series": 5.968705294628825
+      },
+      "full_horizon_seasonal": {
+        "mae": 1.230019211769104,
+        "wape": 0.8716800201880007,
+        "cumulative_mae_per_series": 7.526992321014404
+      }
+    },
+    {
+      "origin": "d_1913",
+      "common_14d": {
+        "mae": 1.02541477908498,
+        "wape": 0.7279055829952713,
+        "cumulative_mae_per_series": 5.726403231711463
+      },
+      "common_14d_seasonal": {
+        "mae": 1.2161786556243896,
+        "wape": 0.8633220582512647,
+        "cumulative_mae_per_series": 6.934207916259766
+      },
+      "full_horizon": {
+        "mae": 1.02541477908498,
+        "wape": 0.7279055829952713,
+        "cumulative_mae_per_series": 5.726403231711463
+      },
+      "full_horizon_seasonal": {
+        "mae": 1.2161786556243896,
+        "wape": 0.8633220582512647,
+        "cumulative_mae_per_series": 6.934207916259766
+      }
+    }
+  ]
+}

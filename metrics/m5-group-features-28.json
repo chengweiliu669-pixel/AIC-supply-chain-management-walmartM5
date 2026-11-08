@@ -1,0 +1,116 @@
+{
+  "horizon": 28,
+  "store": null,
+  "series_count": 30490,
+  "sales_file": "sales_train_evaluation.csv",
+  "calendar_file": "calendar.csv",
+  "prices_file": "sell_prices.csv",
+  "price_mode": "planned_price_known",
+  "enriched_features": true,
+  "group_features": true,
+  "feature_count": 64,
+  "models_per_fold": {},
+  "training_weeks": 26,
+  "lightgbm_version": "4.6.0",
+  "folds": [
+    {
+      "origin": "d_1857",
+      "common_14d": {
+        "mae": 1.0357586348690428,
+        "wape": 0.735421985415779,
+        "cumulative_mae_per_series": 6.138949107851574
+      },
+      "common_14d_seasonal": {
+        "mae": 1.201920986175537,
+        "wape": 0.8534026188321712,
+        "cumulative_mae_per_series": 7.255887031555176
+      },
+      "full_horizon": {
+        "mae": 1.0452411073051797,
+        "wape": 0.7587520422974015,
+        "cumulative_mae_per_series": 11.09504314111632
+      },
+      "full_horizon_seasonal": {
+        "mae": 1.210618257522583,
+        "wape": 0.8788011227251509,
+        "cumulative_mae_per_series": 13.7554931640625
+      },
+      "days_15_to_28": {
+        "mae": 1.0547235797413166,
+        "wape": 0.7831494534511865,
+        "cumulative_mae_per_series": 6.80072029277727
+      },
+      "days_15_to_28_seasonal": {
+        "mae": 1.2193154096603394,
+        "wape": 0.9053616127107603,
+        "cumulative_mae_per_series": 7.889898300170898
+      }
+    },
+    {
+      "origin": "d_1885",
+      "common_14d": {
+        "mae": 1.031230447422386,
+        "wape": 0.7308040149994184,
+        "cumulative_mae_per_series": 6.019337988761868
+      },
+      "common_14d_seasonal": {
+        "mae": 1.230019211769104,
+        "wape": 0.8716800201880007,
+        "cumulative_mae_per_series": 7.526992321014404
+      },
+      "full_horizon": {
+        "mae": 1.0332843095483968,
+        "wape": 0.7452822772967621,
+        "cumulative_mae_per_series": 10.770351924412877
+      },
+      "full_horizon_seasonal": {
+        "mae": 1.2323548793792725,
+        "wape": 0.8888669224907192,
+        "cumulative_mae_per_series": 14.377107620239258
+      },
+      "days_15_to_28": {
+        "mae": 1.0353381716744077,
+        "wape": 0.7602848363649992,
+        "cumulative_mae_per_series": 6.337233788590856
+      },
+      "days_15_to_28_seasonal": {
+        "mae": 1.234690546989441,
+        "wape": 0.9066762086951735,
+        "cumulative_mae_per_series": 7.926008701324463
+      }
+    },
+    {
+      "origin": "d_1913",
+      "common_14d": {
+        "mae": 1.0250240590869688,
+        "wape": 0.7276282247264603,
+        "cumulative_mae_per_series": 5.745022835913136
+      },
+      "common_14d_seasonal": {
+        "mae": 1.2161786556243896,
+        "wape": 0.8633220582512647,
+        "cumulative_mae_per_series": 6.934207916259766
+      },
+      "full_horizon": {
+        "mae": 1.049339749571235,
+        "wape": 0.7272840665938888,
+        "cumulative_mae_per_series": 10.60119273491461
+      },
+      "full_horizon_seasonal": {
+        "mae": 1.2439723014831543,
+        "wape": 0.8621813918900049,
+        "cumulative_mae_per_series": 13.775008201599121
+      },
+      "days_15_to_28": {
+        "mae": 1.0736554400555016,
+        "wape": 0.7269558007957823,
+        "cumulative_mae_per_series": 6.51814789627514
+      },
+      "days_15_to_28_seasonal": {
+        "mae": 1.271765947341919,
+        "wape": 0.8610933985578281,
+        "cumulative_mae_per_series": 7.943784713745117
+      }
+    }
+  ]
+}
