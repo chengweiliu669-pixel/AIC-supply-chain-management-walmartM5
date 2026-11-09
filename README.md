@@ -47,11 +47,16 @@ Local CPU experiments on the 28-day M5 Accuracy private evaluation window (May 2
 | Repeat last 7 days | 0.8470 | −1,861 |
 | Original head | 1.2915 | +22,357 |
 | Original head with calendar adjustment | 1.2719 | +23,379 |
-| Shared weekly head | 1.1776 | +5,793 |
+| Shared weekly head, 32 steps | 1.1776 | +5,793 |
+| Shared weekly head, 128 steps | 1.1358 | +8,454 |
 
 ![28-day residual comparison](outputs/m5_shared_head_residual_comparison.png)
 
-The fixed-weight [origin-shift experiment](outputs/m5_shifted_origin_residuals.png) moved the largest positive residual with output position 16 across all four origins. The shared head uses a fixed seven-day basis, so predictions repeat by week. The original and modified runs use 56 input days, a frozen one-layer GPT-2 backbone and 32 training batches.
+The fixed-weight [origin-shift experiment](outputs/m5_shifted_origin_residuals.png) moved the largest positive residual with output position 16 across all four origins. The shared head uses a fixed seven-day basis, so predictions repeat by week. The runs use 56 input days and a frozen one-layer GPT-2 backbone. The 128-step run reproduces the first 32 training steps with the same seed, then trains for 96 additional batches. Compared with 32 steps, WRMSSE improved by 3.5%, while the June 7 overforecast grew by 2,662 units. Repeating the last seven days still had the lowest WRMSSE and the smallest absolute error on June 7.
+
+![Residuals for the 32-step and 128-step shared heads and seven-day baseline](outputs/m5_shared_head_128_comparison.png)
+
+[Daily forecasts and residuals](outputs/m5_shared_head_128_comparison.csv) · [WRMSSE by aggregation level](outputs/m5_shared_head_128_wrmsse.csv)
 
 ### Reproduce locally
 
@@ -80,6 +85,8 @@ $env:HF_HOME = "$pwd/work/hf"
 & $python work/plot_shift.py
 & $python work/run_m5_shared_head.py
 & $python work/plot_shared_head.py
+& $python work/run_m5_shared_head_128.py --steps 128
+& $python work/plot_shared_head_128.py
 ```
 
 The first run downloads pretrained GPT-2 weights from Hugging Face. The plotting scripts use Windows Microsoft YaHei for Chinese labels. Raw competition files, downloaded weights and per-item output files are kept locally.
