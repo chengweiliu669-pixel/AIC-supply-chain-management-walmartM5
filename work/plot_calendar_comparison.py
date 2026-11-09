@@ -1,0 +1,52 @@
+from pathlib import Path
+import matplotlib
+matplotlib.use("Agg")
+import matplotlib.pyplot as plt
+import matplotlib.dates as mdates
+from matplotlib import font_manager, ticker
+import numpy as np
+import pandas as pd
+
+root = Path(__file__).resolve().parents[1]
+out = root / "outputs"
+old = pd.read_csv(out / "m5_residual_comparison.csv", parse_dates=["date"])
+new = pd.read_csv(out / "m5_calendar_daily_residuals.csv", parse_dates=["date"])
+assert len(old) == len(new) == 28
+d = old.merge(new, on="date", suffixes=("_original", "_calendar"), validate="one_to_one")
+assert len(d) == 28 and d.actual_original.equals(d.actual_calendar)
+d = d.rename(columns={"actual_original": "actual"}).drop(columns=["actual_calendar", "extra_absolute_error"])
+d["absolute_error_improvement"] = d.residual_original.abs() - d.residual_calendar.abs()
+d.to_csv(out / "m5_calendar_residual_comparison.csv", index=False)
+
+font = "C:/Windows/Fonts/msyh.ttc"
+font_manager.fontManager.addfont(font)
+plt.rcParams.update({"font.family": font_manager.FontProperties(fname=font).get_name(),
+                     "axes.unicode_minus": False, "font.size": 11})
+fig, ax = plt.subplots(figsize=(13, 5.4), layout="constrained")
+x = mdates.date2num(d.date)
+focus = d.date.dt.strftime("%m-%d").isin(["06-06", "06-07"])
+ax.axvspan(x[focus][0] - .48, x[focus][-1] + .48, color="#fff0c7", zorder=0)
+ax.bar(x - .27, d.residual_original, .25, color="#295bb0", label="原版 Time-LLM")
+ax.bar(x, d.residual_calendar, .25, color="#008372", label="加入日历的 Time-LLM")
+ax.bar(x + .27, d.weekly_naive_residual, .25, color="#8798a9", label="重复最近 7 天销量")
+ax.axhline(0, color="#293549", lw=1)
+ax.set_title("M5 · 加入日历特征后的 28 天销量残差", loc="left", weight="bold", fontsize=18, pad=14)
+ax.set_ylabel("预测 − 实际（件）")
+ax.set_xlabel("日期（2016 年）")
+ax.set_xticks(x)
+ax.xaxis.set_major_formatter(mdates.DateFormatter("%m-%d"))
+ax.tick_params(axis="x", labelrotation=55, length=0)
+for label, highlight in zip(ax.get_xticklabels(), focus):
+    if highlight:
+        label.set_weight("bold")
+        label.set_color("#975500")
+ax.yaxis.set_major_formatter(ticker.StrMethodFormatter("{x:,.0f}"))
+ax.spines[["top", "right", "left"]].set_visible(False)
+ax.set_axisbelow(True)
+ax.grid(axis="y", color="#e2e8f0")
+ax.margins(y=.18)
+ax.legend(loc="upper left", ncols=3, frameon=False)
+fig.savefig(out / "m5_calendar_residual_comparison.png", dpi=160, facecolor="white")
+print(d.loc[focus, ["date", "actual", "residual_original", "residual_calendar", "weekly_naive_residual",
+                    "absolute_error_improvement"]].to_string(index=False))
+print("Daily aggregate MAE:", d[["residual_original", "residual_calendar", "weekly_naive_residual"]].abs().mean().to_dict())

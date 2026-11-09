@@ -1,0 +1,10 @@
+/.venv/
+/work/.venv/
+/work/Time-LLM/
+/work/m5/
+/work/hf/
+/work/*.npy
+/work/*.log
+/work/*.zip
+/outputs/m5_item_store_residuals.csv
+__pycache__/
