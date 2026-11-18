@@ -2,7 +2,7 @@
 
 The selected completed full-panel experiment achieved **49.9963% test WAPE** using a fully trained Transformer with seven-day tokens and approximately three years of history.
 
-[Start with the notebook](Favorita.ipynb).
+[Start with the notebook](Favorita.ipynb). It includes optional validation inference, seasonal and trailing-mean baselines, bias and segment diagnostics, a chronological scale/blend experiment, and a prioritized plan for feature ablations. Analysis outputs are written under runs/favorita-improvement. The expensive analysis is disabled by default while other GPU jobs are running.
 
 ## Recorded results
 
