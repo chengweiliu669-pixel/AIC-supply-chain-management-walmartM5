@@ -1,3 +1,11 @@
+# Retail Sales Forecasting
+
+## Favorita Transformer
+
+The selected completed full-panel Favorita model achieved **49.9963% daily test WAPE**. It uses seven-day tokens, approximately three years of history and a 12-layer Transformer. Evaluation is rolling one-day-ahead, using actual sales through the previous day.
+
+[English methods and reproduction guide](favorita/README.md) | [Notebook](favorita/Favorita.ipynb) | [Recorded metrics](favorita/metrics.json)
+
 # Walmart M5 Forecasting
 
 This repository contains two experiments on the Walmart M5 sales panel. The LightGBM baseline evaluates 14- and 28-day replenishment forecasts using WAPE over historical folds. The Time-LLM experiments use WRMSSE on the 28-day M5 private evaluation window. The scores use different metrics and evaluation windows and are reported separately.

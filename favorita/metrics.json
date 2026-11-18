@@ -1,0 +1,37 @@
+{
+  "dataset": "favorita",
+  "mode": "long",
+  "weekly": false,
+  "raw_panel_rows": 125497040,
+  "series": 174685,
+  "seen_series": 172991,
+  "rows": 4843748,
+  "parameters": 7240641,
+  "patch_days": 7,
+  "context_tokens": 157,
+  "train_windows": 183897562,
+  "best_epoch": 1,
+  "validation_wape": 0.49144088814252723,
+  "test_wape": 0.4999634750273137,
+  "start": "2017-07-19",
+  "end": "2017-08-15",
+  "event_floor": 5.0,
+  "surge": {
+    "tp": 67883,
+    "fp": 39541,
+    "fn": 310370,
+    "alerts": 107424,
+    "events": 378253,
+    "precision": 0.6319165177241585,
+    "recall": 0.1794645382852218
+  },
+  "drop": {
+    "tp": 116757,
+    "fp": 58283,
+    "fn": 193817,
+    "alerts": 175040,
+    "events": 310574,
+    "precision": 0.6670303930530165,
+    "recall": 0.3759393896462679
+  }
+}
