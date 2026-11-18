@@ -18,7 +18,10 @@ The selected completed full-panel experiment achieved **49.9963% test WAPE** usi
 | Upward precision / recall | 63.19% / 17.95% |
 | Downward precision / recall | 66.70% / 37.59% |
 
-![Daily actual and predicted sales](forecast.png)
+![Selected actual and predicted daily product sales](figures/selected-products.png)
+
+These six examples were selected for low error and visible variation across different sales levels, with distinct stores and products. Selection requires 28 scored days, at least 26 nonzero days, mean daily sales of at least 10, coefficient of variation of at least 0.2 and WAPE at most 30%. The examples illustrate favorable individual predictions. Full-panel test WAPE remains 49.9963%.
+
 
 ## Data and temporal evaluation
 
@@ -57,3 +60,11 @@ Full training processes hundreds of millions of windows and can take multiple da
 model.pt is the selected checkpoint. series.npy preserves its embedding order. metrics.json and forecast.png are recorded outputs. Input data and the full prediction table can be obtained or regenerated locally.
 
 The published source was retrieved from the completed training host. Publication edits restrict the CLI to this experiment, extract its metric helper and ensure the output directory exists. Full retraining for this publication and bitwise equivalence across GPU/software versions are unverified.
+
+Recreate the product figures from the original prediction table:
+
+~~~sh
+python favorita/plot_products.py --predictions outputs/favorita-patch-long-predictions.csv.gz
+~~~
+
+Selected daily values and per-series WAPE are saved in figures/selected-products.csv and figures/selection-metrics.csv.

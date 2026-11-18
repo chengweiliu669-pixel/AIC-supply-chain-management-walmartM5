@@ -21,7 +21,10 @@ This repository provides the source, selected checkpoint and experimental protoc
 
 WAPE is total absolute prediction error divided by total actual sales across all eligible item-store-day observations. A WAPE of 49.9963% corresponds to 0.4999634750273137 in the recorded JSON.
 
-![Actual and predicted daily sales for six item-store series](favorita/forecast.png)
+![Selected actual and predicted daily product sales](favorita/figures/selected-products.png)
+
+These six examples were selected for low error and visible variation across different sales levels, with distinct stores and products. Selection requires 28 scored days, at least 26 nonzero days, mean daily sales of at least 10, coefficient of variation of at least 0.2 and WAPE at most 30%. The examples illustrate favorable individual predictions. Full-panel test WAPE remains 49.9963%.
+
 
 ## Evaluation timing
 
