@@ -1,0 +1,13 @@
+{
+  "total_series": 172991,
+  "total_rows": 4843748,
+  "overall_wape": 0.49996347503223515,
+  "high_median_wape": 0.7283863252639518,
+  "high_p90_wape": 1.132874282398968,
+  "above_100pct": 36092,
+  "high_under_error_share": 0.6757647438483879,
+  "high_over_error_share": 0.32423525615161225,
+  "high_zero_day_error_share": 0.10865295251324014,
+  "high_peak_day_error_share": 0.5145199188504848,
+  "high_peak_day_row_share": 0.2604705076767993
+}

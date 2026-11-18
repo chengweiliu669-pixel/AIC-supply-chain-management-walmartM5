@@ -21,10 +21,44 @@ This repository provides the source, selected checkpoint and experimental protoc
 
 WAPE is total absolute prediction error divided by total actual sales across all eligible item-store-day observations. A WAPE of 49.9963% corresponds to 0.4999634750273137 in the recorded JSON.
 
-![Selected actual and predicted daily product sales](favorita/figures/selected-products.png)
+## Low-error and high-error product forecasts
 
-These six examples were selected for low error and visible variation across different sales levels, with distinct stores and products. Selection requires 28 scored days, at least 26 nonzero days, mean daily sales of at least 10, coefficient of variation of at least 0.2 and WAPE at most 30%. The examples illustrate favorable individual predictions. Full-panel test WAPE remains 49.9963%.
+A series is one **store × product** pair evaluated across the same 28 test days. Groups below use each series' WAPE, with a 30% cutoff. Percentages use all **172,991 scored series** as the denominator. The full panel contains 174,685 series, including series excluded by the fit-cutoff rule.
 
+| Group | Series | Share of scored series | Group WAPE | Share of actual sales | Share of absolute error |
+|---|---:|---:|---:|---:|---:|
+| Low error, WAPE ≤30% | 6,316 | 3.65% | 24.75% | 18.91% | 9.36% |
+| High error, WAPE >30% | 142,284 | 82.25% | 55.86% | 81.09% | 90.60% |
+| Zero actual sales over all 28 days | 24,391 | 14.10% | Undefined | 0.00% | 0.04% |
+
+Group WAPE is the sum of absolute errors divided by group actual sales, rather than an arithmetic average of per-series percentages. Zero-actual series have an undefined individual WAPE, but their prediction errors contribute to the full-panel score of **49.9963%**.
+
+### Low-error examples
+
+![Selected low-error daily product forecasts](favorita/figures/selected-products.png)
+
+These six favorable examples span different sales levels and distinct stores/products. Selection requires 28 days, at least 26 nonzero days, mean daily sales ≥10, coefficient of variation ≥0.2 and WAPE ≤30%, followed by low-WAPE selection within sales-level bands. Their WAPE ranges from 13.18% to 15.07%. They illustrate selected successful predictions.
+
+### High-error examples
+
+![Selected high-error daily product forecasts](favorita/figures/high-error-products.png)
+
+High-group per-series median WAPE is **72.84%**, with a 90th percentile of **113.29%**. There are **36,092** positive-sales series above 100% WAPE.
+
+The four diagnostic cases use full 28-day windows and mean daily sales ≥5. The first is close to the high-group median WAPE. The next two have net underprediction or overprediction exceeding 50% of their actual sales. The final case has 4–14 nonzero days and illustrates a transition out of a zero-sales spell. Cases are selected for visible error patterns, with distinct stores and products.
+
+### Where high-error forecasts miss
+
+Across the entire high-error group:
+
+- **Underprediction accounts for 67.58% of absolute error**, compared with 32.42% from overprediction. This measures the magnitude of negative and positive daily residuals.
+- Days at or above each series' own 80th-percentile actual sales, with actual sales >0, account for **51.45% of high-group error** while representing **26.05% of high-group days**. Quantile ties make the row share exceed 20%.
+- Predictions on days with zero actual sales account for **10.87% of high-group error**. The model can continue forecasting demand through zero-sales spells.
+- The Store 9 / Product 2060787 example misses a sharp spike. Store 20 / Product 671062 stays too low as sales rise. Store 6 / Product 884878 retains an excessive sales level. Store 3 / Product 1105211 forecasts sales at the start of a zero-sales spell and responds late when sales resume.
+
+These are descriptive test-set diagnostics. They do not establish why a spike or zero-sales spell occurred. Promotions, stockouts and changing demand remain hypotheses requiring feature and data checks. Subsequent improvement choices should be assessed with a fresh chronological validation period because these test examples have now been inspected.
+
+[Group counts](favorita/figures/error-groups.csv) · [Aggregate diagnostics](favorita/figures/error-diagnostics.json) · [High-error example values](favorita/figures/high-error-products.csv) · [High-error selection metrics](favorita/figures/high-error-selection.csv)
 
 ## Evaluation timing
 
